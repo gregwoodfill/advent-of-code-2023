@@ -11,8 +11,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: deps
-      run: sudo apt-get -y install golangci-lint golang-go
+    - name: Run golangci-lint
+      uses: golangci/golangci-lint-action@v3.7.0
 
-    - name: Build
-      run: make
+    - name: deps
+      run: sudo apt-get -y golang-go
+
+    - name: Test
+      run: make test
