@@ -6,15 +6,13 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
 
     - name: deps
-      run: apt-get install golangci-lint golang-go
+      run: sudo apt-get -y install golangci-lint golang-go
 
     - name: Build
       run: make
-    
