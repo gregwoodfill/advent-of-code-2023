@@ -6,14 +6,13 @@ on:
 
 jobs:
   build:
+    name: test
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
-
-    - name: Run golangci-lint
-      uses: golangci/golangci-lint-action@v3.7.0
-
+    - uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
     - name: deps
       run: sudo apt-get -y golang-go
 
