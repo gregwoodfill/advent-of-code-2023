@@ -1,14 +1,14 @@
 package main
 
 import (
-	"advent-of-code/day01/puzzle"
+	"advent-of-code/day02/game"
 	"bufio"
 	"fmt"
 	"os"
 )
 
 func main() {
-	fileName := "./day01/input.txt"
+	fileName := "./day02/input.txt"
 	sum := 0
 	file, err := os.Open(fileName)
 	defer func() { _ = file.Close() }()
@@ -19,12 +19,16 @@ func main() {
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		text := scanner.Text()
-		i, err := puzzle.FirstAndLastDigitAsInt(text)
-		if err != nil {
-			fmt.Printf("could not read ints from line %s, %v\n", text, err)
-			os.Exit(1)
+		gamePlayed := game.NewGame(text)
+
+		minCubes := gamePlayed.MiniumRequired()
+		powers := 1
+		for _, v := range minCubes {
+			if v > 0 {
+				powers *= v
+			}
 		}
-		sum += i
+		sum += powers
 	}
 	fmt.Printf("sum: %d", sum)
 }
